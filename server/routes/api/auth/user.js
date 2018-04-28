@@ -3,7 +3,7 @@ var utils = require('utility');
 
 var config = require('../../../config');
 var dbHelper = require('../../../models/dbHelper');
-var UserDao = require('../../../models/UserDao');
+var UserDao = require('../../../models/userDao');
 
 var User = dbHelper.User;
 
