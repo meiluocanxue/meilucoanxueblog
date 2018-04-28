@@ -140,5 +140,7 @@ router.post('/login/logout', function (req, res, next) {
   userLoginApi.userLogout(req, res, next);
 });
 router.get('/user/info', userLoginApi.getUserInfo);
+router.get('/checkLogin', userLoginApi.checkLogin);
+
 
 module.exports = router;

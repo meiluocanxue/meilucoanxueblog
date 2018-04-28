@@ -4,7 +4,8 @@
   "description": "梅落残雪博客服务端",
   "main": "bin/www",
   "scripts": {
-    "dev": "node bin/www"
+    "dev": "supervisor bin/www",
+    "dev-origin": "node bin/www"
   },
   "keywords": [
     "meiluocanxue"
@@ -44,5 +45,7 @@
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
 }

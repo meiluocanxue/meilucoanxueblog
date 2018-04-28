@@ -25,5 +25,14 @@ module.exports = {
             req.flash(config.constant.flash.error,'大爷，这不是你该来的地呀，嘿嘿！');
             res.redirect('/');
         }
+    },
+    isAdminApi:function(req, res, next){
+        var user = req.session.user;
+        if(user && user.role === config.constant.role.admin){
+            return next();
+        }else{
+            //req.flash(config.constant.flash.error,'大爷，这不是你该来的地呀，嘿嘿！');
+            res.json({status:0,errorNum:403,message:"大爷，你没这权限，嘿嘿！"});
+        }
     }
 };

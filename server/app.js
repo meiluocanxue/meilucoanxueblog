@@ -29,6 +29,7 @@ var adminUser = require('./routes/admin/user');
 var manageArticle = require('./routes/admin/article');
 var manageCategory = require('./routes/admin/category');
 var api = require('./routes/api/index');
+var authApi = require('./routes/api/auth')
 var upload = require('./routes/upload/index');
 
 //登录passport
@@ -106,7 +107,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
     secret: config.db.cookieSecret,
-    cookie: {maxAge : 30 * 60 *1000}
+    cookie: {maxAge : 24 * 60 * 60 *1000}
 }));
 //passport
 app.use(passport.initialize());
@@ -130,7 +131,7 @@ app.use(passport.session());
  * */
 app.all('*', function (req, res, next) {
     //CORS
-    res.header("Access-Control-Allow-Origin","http://localhost:8080");
+    res.header("Access-Control-Allow-Origin","http://localhost:8090");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Control-Type, Accept");
     res.header("Access-Control-Allow-Credentials", true);
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -143,19 +144,20 @@ app.all('*', function (req, res, next) {
  * 全局参数传递
  * */
 app.use(function (req, res, next) {
-   res.locals.site = config.site;
-   res.locals.success = req.flash(config.constant.flash.success);
-   res.locals.error = req.flash(config.constant.flash.error);
-   res.locals.session = req.session;
+    res.locals.site = config.site;
+    res.locals.success = req.flash(config.constant.flash.success);
+    res.locals.error = req.flash(config.constant.flash.error);
+    res.locals.session = req.session;
     res.locals.nowtime = new Date().getTime();
-   dbHelper.Category.find({status:true}).exec(function (err,doc) {
-       if(err){
-           next(err);
-       }else{
-           res.locals.cats = doc;
-           next();
-       }
-   });
+    res.type('html')
+    dbHelper.Category.find({status:true}).exec(function (err,doc) {
+        if(err){
+            next(err);
+        }else{
+            res.locals.cats = doc;
+            next();
+        }
+    });
 });
 
 
@@ -168,6 +170,8 @@ app.use('/uploadfile', authority.isAuthenticated, upload);
 
 //api
 app.use('/api', api);
+app.use('/api/auth',authority.isAdminApi, authApi);
+app.use('/api/upload',authority.isAdminApi, upload);
 //admin
 app.use('/admin', authority.isAdmin, admin);
 //文章管理路由

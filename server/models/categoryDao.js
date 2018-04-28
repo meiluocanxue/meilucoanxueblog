@@ -5,6 +5,11 @@ var dbHelper = require('./dbHelper');
 var Category = dbHelper.Category;
 
 module.exports = {
+    findCategoryUsed: function (callback) {
+        Category.find({status:true}).sort({'order':'desc'}).then(function (doc) {
+            callback(doc);
+        })
+    },
     findCategoryAll: function (callback) {
         Category.find({}).sort({'order':'desc'}).then(function (doc) {
             callback(doc);

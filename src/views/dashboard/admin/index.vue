@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-editor-container">
     <github-corner></github-corner>
-
+    首页
   </div>
 </template>
 

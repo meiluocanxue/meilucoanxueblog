@@ -56,13 +56,14 @@ export const constantRouterMap = [{
     { path: '/reg', component: _import('reg/index'), hidden: true },
     {
         path: '/admin',
+        name: 'admin',
         component: Layout,
-        redirect: 'dashboard',
+        redirect: 'index',
         children: [{
-            path: 'dashboard',
+            path: 'index',
             component: _import('dashboard/index'),
             name: 'dashboard',
-            meta: { title: '管理首頁', icon: 'home', noCache: true }
+            meta: { title: '管理首页', icon: 'home', noCache: true, role: ['admin', 'reader']}
         }]
     },
     { path: '/401', component: _import('errorPage/401'), hidden: true },
@@ -79,7 +80,7 @@ export default new Router({
 export const asyncRouterMap = [{
         path: '/admin/p',
         component: Layout,
-        redirect: 'admin/p/index',
+        redirect: 'index',
         name: 'post',
         meta: { title: '博文管理', icon: 'article', role: ['admin', 'reader'] },
         children: [{
@@ -93,7 +94,7 @@ export const asyncRouterMap = [{
         }, {
             path: 'post',
             component: _import('admin/post/detail'),
-            name: 'post-ae',
+            //name: 'post-ae',
             meta: {
                 title: '博文添加/博文修改',
                 //icon: 'edit',
@@ -103,7 +104,7 @@ export const asyncRouterMap = [{
     }, {
         path: '/admin/c',
         component: Layout,
-        redirect: 'admin/c/index',
+        redirect: 'index',
         name: 'category',
         meta: { title: '分类管理', icon: 'category', role: ['admin', 'reader'] },
         children: [{
@@ -112,24 +113,15 @@ export const asyncRouterMap = [{
             name: 'category-list',
             meta: {
                 title: '分类管理',
-                icon: '',
+                icon: 'category',
                 role: ['admin', 'reader']
-            }
-        }, {
-            path: 'category',
-            component: _import('admin/category/detail'),
-            name: 'category-ae',
-            meta: {
-                title: '博文添加/博文修改',
-                icon: '',
-                role: ['admin']
             }
         }]
     }, {
         path: '/admin/u',
         component: Layout,
-        redirect: 'admin/u/index',
-        name: 'user',
+        redirect: 'index',
+        name: 'user-ae',
         meta: { title: '用戶管理', icon: 'user', role: ['admin'] },
         children: [{
             path: 'index',
@@ -143,7 +135,7 @@ export const asyncRouterMap = [{
         }, {
             path: 'user',
             component: _import('admin/user/detail'),
-            name: 'user-ae',
+            name: 'user',
             meta: {
                 title: '用户添加/用户修改',
                 //icon: 'edit',
@@ -182,6 +174,7 @@ export const asyncRouterMap = [{
     {
         path: '/icon',
         component: Layout,
+        name: 'icon-ae',
         children: [{
             path: 'index',
             component: _import('svg-icons/index'),

@@ -1,10 +1,10 @@
 /**
  * Created by Administrator on 2017/11/24.
  */
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 
 //mongoose.connect('mongodb://127.0.0.1:27017/loveyedie');
-mongoose.connect('mongodb://127.0.0.1:27017/loveyedie',{useMongoClient: true});
+//mongoose.connect('mongodb://127.0.0.1:27017/loveyedie',{useMongoClient: true});
 
 var userSchema  = new mongoose.Schema({
     "userId":{type:String},

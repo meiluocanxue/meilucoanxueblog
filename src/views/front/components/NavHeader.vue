@@ -112,6 +112,16 @@ export default {
       userid && this.$router.push({path:'/u/'+ userid});
     },
     logout(){
+      this.$store.dispatch("UserLogout", this.loginForm)
+      .then((res) => {
+        //this.loading = false;
+        console.log(res);
+        this.$router.push({ path: "/login" });
+        // this.showDialog = true
+      })
+      .catch(() => {
+        //this.loading = false;
+      });
       //this.router.push({path:'/login'});
     }
   }

@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/12/24.
  */
 const getters = {
+    staticUrl : state => state.app.staticUrl,
     sidebar: state => state.app.sidebar,
     searchhistory: state => state.app.searchHistory,
     //language: state => state.app.language,

@@ -3,7 +3,7 @@
  */
 const app = {
   state: {
-
+    staticUrl: location.protocol + '//' + (location.host.indexOf(':')>-1 ? location.host.split(':')[0] : location.host) ,
     sidebar: {
       opened: !+sessionStorage.getItem('sidebarStatus')
     },

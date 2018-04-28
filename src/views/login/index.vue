@@ -99,7 +99,7 @@ export default {
         ]
       },
       pwdType: "password",
-      picCode: '/api/code?v=' + Date.now(),
+      picCode: process.env.BASE_API + '/code?v=' + Date.now(),
       loading: false,
       showDialog: false
     };
@@ -120,8 +120,7 @@ export default {
             .dispatch("UserLoginForm", this.loginForm)
             .then((res) => {
               this.loading = false;
-              console.log(res);
-              this.$router.push({ path: "/" });
+              this.$router.push({ path: "/admin/index" });
               // this.showDialog = true
             })
             .catch(() => {
@@ -137,7 +136,7 @@ export default {
         this.$router.push({path: '/reg'})
     },
     changCode(){
-        this.picCode = '/api/code?v=' + Date.now()
+        this.picCode = process.env.BASE_API + '/code?v=' + Date.now()
     },
     afterQRScan() {
       // const hash = window.location.hash.slice(1)

@@ -324,3 +324,41 @@ code {
     }
   }
 }
+
+.title-prompt{
+    position: absolute;
+    right: 0px;
+    font-size: 12px;
+    top:10px;
+    color:#ff4949;
+}
+.createPost-container {
+    position: relative;
+    .createPost-main-container {
+        padding: 40px 45px 20px 50px;
+        .postInfo-container {
+            position: relative;
+            margin-bottom: 10px;
+            .postInfo-container-item {
+                float: left;
+            }
+        }
+        .editor-container {
+            min-height: 500px;
+            margin: 0 0 30px;
+            .editor-upload-btn-container {
+                text-align: right;
+                margin-right: 10px;
+                .editor-upload-btn {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    .word-counter {
+        width: 40px;
+        position: absolute;
+        right: -10px;
+        top: 0px;
+    }
+}

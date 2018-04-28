@@ -58,6 +58,20 @@ const user = {
         })
       })
     },
+    // 用户名登录
+    UserLogout({ commit }) {
+      //const username = userInfo.username.trim()
+      return new Promise((resolve, reject) => {
+        logout().then(response => {
+          commit('SET_TOKEN', '')
+          removeToken()
+          resolve('你已退出')
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
 
     // 获取用户信息
     GetUserInfo({ commit, state }) {

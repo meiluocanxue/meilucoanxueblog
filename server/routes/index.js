@@ -68,6 +68,7 @@ router.get('/',function(req, res, next){
         if(err){
             next(err);
         }else{
+            res.type('html')
             res.render('index',{
                 recommend:recommend,
                 hotArticle:hotArticle,
@@ -101,6 +102,7 @@ router.get('/page/:p',function(req, res, next){
         if(err){
             next(err);
         }else{
+            res.type('html')
             res.render('index',{
                 recommend:recommend,
                 hotArticle:hotArticle,
@@ -141,6 +143,7 @@ router.get('/c/:id',function(req, res, next){
         for(var i = 1; i <= result.pages.pageCount; i++){
             pageArr.push({pageNum: i,active: i == page ? 1 : 0, pageItemUrl: pageUrl + '?page=' + i});
         }
+        res.type('html')
         res.render('p/list',{
             articles:articles,
             cat:cat,
@@ -156,6 +159,7 @@ router.get('/c/:id',function(req, res, next){
 
 //关于我
 router.get('/aboutme',function(req, res, next){
+    res.type('html')
     res.render('me/aboutme',{layout: 'main'});
 });
 
@@ -174,6 +178,7 @@ router.get('/search/:keyword', function (req, res, next) {
         for(var i = 1; i <= doc.pageCount; i++){
             pageArr.push({pageNum: i, active: i == page ? 1 : 0, pageItemUrl: pageUrl + '?page=' + i});
         }
+        res.type('html')
         res.render('p/list',{
             keyword:keyword,
             articles:articles,
@@ -195,6 +200,7 @@ router.post('/search', function (req, res, next) {
 
 //登录
 router.get('/login', function (req, res) {
+    res.type('html')
     res.render('login',{
         layout:'single'
     });
@@ -241,6 +247,7 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 router.get('/join', function (req, res, next) {
+    res.type('html')
     res.render('join', {layout: 'single'});
 });
 router.post('/join', function (req, res, next) {
@@ -310,6 +317,7 @@ router.get('/u/:id', function (req, res, next) {
         if(err){
             next(err);
         }else{
+            res.type('html')
             res.render("u/detail", {
                 user:doc,
                 layout: "main"

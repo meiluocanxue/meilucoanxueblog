@@ -51,6 +51,21 @@ var userLogout = function (req, res, next) {
   res.json({status: 1,errorNum: 0,info: '大爷，你已登出！'});
 };
 
+var checkLogin = function (req, res, next) {
+  if(req.session &&　req.session.user){
+    res.json({
+      status: 1,
+      errorNum: 0,
+      result: {
+        user:req.session.user
+      }
+    });
+  }else{
+    res.json({status: 0,errorNum: 403,message: '大爷，登录过期，请重新登录！'});
+  }
+  
+};
+
 var getUserInfo = function (req, res, next) {
   var token = req.query.token;
   var userId = req.query.userid;
@@ -92,5 +107,6 @@ var getUserInfo = function (req, res, next) {
 module.exports = {
   userLogin: userLogin,
   userLogout: userLogout,
-  getUserInfo: getUserInfo
+  getUserInfo: getUserInfo,
+  checkLogin:checkLogin
 }

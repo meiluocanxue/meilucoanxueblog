@@ -11,6 +11,7 @@
 
 <script>
 import { Navbar, Sidebar, AppMain, TagsView } from './components'
+import { checkLogin } from '../../api/login'
 
 export default {
   name: 'layout',
@@ -24,7 +25,19 @@ export default {
     sidebar() {
       return this.$store.state.app.sidebar
     }
-  }
+	},
+	mounted(){
+		this.checkLogin()
+	},
+	methods: {
+		checkLogin(){
+			checkLogin().then(res => {
+
+			}).catch(res => {
+				this.$router.push('/login')
+			})
+		}
+	}
 }
 </script>
 

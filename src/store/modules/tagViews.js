@@ -5,7 +5,7 @@ const tagViews = {
     },
     mutations: {
         ADD_VISITED_VIEWS: (state, view) => {
-            if (view.name.indexOf('-ae') === -1 && state.visitedViews.some(v => v.path === view.path)) {
+            if (view.name && !state.visitedViews.some(v => v.path === view.path)) {
                 return state.visitedViews.push({
                     name: view.name,
                     path: view.path,
@@ -19,7 +19,7 @@ const tagViews = {
         DEL_VISITED_VIEWS: (state, view) => {
             for (const [i, v] of state.visitedViews.entries()) {
                 if (v.path === view.path) {
-                    state.visitedViews.splice(index, 1);
+                    state.visitedViews.splice(i, 1);
                     break
                 }
             }

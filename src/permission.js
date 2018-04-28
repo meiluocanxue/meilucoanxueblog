@@ -26,7 +26,6 @@ router.beforeEach((to, from, next) => {
             next({ path: '/' });
             NProgress.done() // router在hash模式下 手动改变hash 重定向回来 不会触发afterEach 暂时hack方案 ps：history模式下无问题，可删除该行！
         } else {
-          console.log(store)
             if (store.getters.roles && store.getters.roles.length > 0) {
               // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
               if (hasPermission(store.getters.roles, to.meta.role)) {

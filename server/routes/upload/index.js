@@ -2,8 +2,9 @@
  * Created by Administrator on 2017/12/8.
  */
 
-
+var fs = require('fs');
 var path = require('path');
+
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
@@ -41,6 +42,7 @@ var filter = function (req, file , cb) {
 var limits = {fileSize: 2 * 1024 * 1024};
 var upload = multer({storage: storage, fileFilter: filter, limits: limits});
 
+
 router.post('/:from', upload.single('avatar'), function (req, res, next) {
     var uploadFrom = req.params.from;
     var picUrl = '/upload';
@@ -55,10 +57,12 @@ router.post('/:from', upload.single('avatar'), function (req, res, next) {
             usefor: uploadFrom
         },function (err, doc) {
             if(err){
-                next(err);
+                //next(err);
+                res.json({status: 0,errorNum:100, message: '大爷，不好意思，上传失败！'});
             }else{
                 res.json({
                     status: 1,
+                    errorNum: 0,
                     result: {
                         picId: doc._id || '',
                         picUrl: picUrl + '/' + req.file.filename
@@ -67,11 +71,33 @@ router.post('/:from', upload.single('avatar'), function (req, res, next) {
             }
         });
     }else{
-        res.json({status: 0, message: '大爷，不好意思，上传失败！'});
+        res.json({status: 0,errorNum:100, message: '大爷，不好意思，上传失败！'});
     }
 
 
 });
+
+router.get('/delete',function(req,res,next){
+    var picId = req.query.id;
+    if(!picId) res.json({status: 0,errorNum:100, message: '没有要删除的图片！'});
+    dbHelper.Picture.findById(picId, function (err, doc) {
+        let picUrl = doc.picurl;
+        console.log(path.join( __dirname , '../../public' +  picUrl));
+        let picPath = path.join( __dirname , '../../public' +  picUrl);
+        //fs.unlink(path,callback);
+        //return
+        if(doc){
+            doc.remove(function (err,doc) {
+                fs.exists(picPath, function(exists) {
+                    if(exists) fs.unlink(picPath);
+                });
+                res.json({status: 1,errorNum:0, result:"删除成功"});
+            })
+        }else{
+            res.json({status: 0,errorNum:100, message: '没有要删除的图片！'});
+        }
+    });
+})
 
 router.get('/test', function (req, res, next) {
     res.render('test', {layout: 'main'});

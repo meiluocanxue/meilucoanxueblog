@@ -6,18 +6,19 @@ import { Message } from 'element-ui'
 import store from '../store'
 import { getToken } from '../utils/auth'
 import qs from 'qs';
+import router from '../router'
 
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.BASE_API, // api的base_url
   timeout: 5000 // 请求超时时间
 })
-console.log(process.env);
+//console.log(process.env);
 // request拦截器
 service.interceptors.request.use(config => {
   // Do something before request is sent
   if (store.getters.token) {
-    config.headers['M-Token'] = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
+    //config.headers['M-Token'] = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
   }
   return config
 }, error => {
@@ -35,13 +36,24 @@ service.interceptors.response.use(response => {
 
   const res = response.data;
   if (res.status === 0 || res.errorNum > 0 ) {
-    Message({
-      message: res.message,
-      type: 'error',
-      duration: 5 * 1000
-    });
-
-    return Promise.reject('error');
+    if(res.errorNum == 403){
+      Message({
+        message: res.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+      localStorage.clear()
+      router.push({path:'/login'});
+    }else{
+      Message({
+        message: res.message,
+        type: 'error',
+        duration: 5 * 1000
+      });
+  
+      return Promise.reject('error');
+    }
+    
   } else {
     return res.result;
   }
@@ -62,7 +74,8 @@ const httpApi = (opts) => {
   if (store.getters.token) {
     Public.token = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
   }
-
+  //console.log('----------');
+  //console.log(opts.data)
   let httpDefaultOpts = {
     method: opts.method || 'get',
     //baseURL: 'http://localhost/api',
@@ -84,11 +97,11 @@ const httpApi = (opts) => {
   }else{
     delete httpDefaultOpts.params;
   }
-
+  
   let httpPromise = new Promise((resolve, reject) => {
-
+    //console.log(httpDefaultOpts);
     service(httpDefaultOpts).then((res) => {
-        console.log(res);
+        //console.log(res);
         resolve(res);
     }).catch((response) => {
 

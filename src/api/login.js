@@ -30,3 +30,10 @@ export function getUserInfo(token) {
     params: { token }
   })
 }
+
+export function checkLogin() {
+  return request({
+    url: '/checkLogin',
+    method: 'get'
+  })
+}

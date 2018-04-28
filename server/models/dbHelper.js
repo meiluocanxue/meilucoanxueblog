@@ -108,6 +108,7 @@ var _getArticle = function () {
         url:{type:String},
         source:{type:String},
         source_id:{type:String},
+        status: {type:Boolean, default:true},
         tags:{type: Array,default: []},
         _user:{
             type: Schema.Types.ObjectId,
