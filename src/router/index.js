@@ -175,14 +175,14 @@ export const asyncRouterMap = [{
       component: Layout,
       redirect: 'index',
       name: 'picture',
-      meta: { title: '图片管理', icon: 'category', role: ['admin', 'reader'] },
+      meta: { title: '图片管理', icon: 'pic', role: ['admin', 'reader'] },
       children: [{
           path: 'index',
           component: _import('admin/picture/index'),
           name: 'picture-list',
           meta: {
               title: '图片管理',
-              icon: 'category',
+              icon: 'pic',
               role: ['admin', 'reader']
           }
       }]
