@@ -108,16 +108,17 @@ export default {
     },
     filters: {
         statusFilter(status) {
-        const statusMap = {
-            published: 'success',
-            draft: 'info',
-            deleted: 'danger'
-        }
-        return statusMap[status]
+            const statusMap = {
+                published: 'success',
+                draft: 'info',
+                deleted: 'danger'
+            }
+            return statusMap[status]
         },
         typeFilter(type) {
-        return calendarTypeKeyValue[type]
-        }
+            return calendarTypeKeyValue[type]
+        },
+        parseTime
     },
     created(){
         this.getCategoryList();

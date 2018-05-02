@@ -121,7 +121,8 @@ export default {
         },
         pictureFullUrlFilter(src) {
             return process.env.PIC_HOST + src
-        }
+        },
+        parseTime
     },
     created(){
         this.getList();
