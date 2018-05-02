@@ -5,5 +5,5 @@ const prodEnv = require('./prod.env')
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
   BASE_API: '"http://localhost:8090/api"',
-  PIC_HOST: '"http://localhost/"'
+  PIC_HOST: '"http://localhost"'
 })

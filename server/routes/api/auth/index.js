@@ -13,6 +13,7 @@ var svgCaptcha = require('svg-captcha');
 var post = require('./post');
 var category = require('./category');
 var user = require('./user');
+var picture = require('./picture');
 
 
 
@@ -40,5 +41,10 @@ router.get('/user/one', user.getSingleUser);
 router.get('/user/effect', user.effectiveUser);
 router.get('/user/delete', user.deleteUser);
 router.post('/user/save', user.saveUser);
+
+router.get('/picture/all', picture.getPictureAll);
+router.get('/picture/delete', picture.deletePicture);
+router.get('/picture/forceDelete', picture.deleteForcePicture);
+router.post('/picture/save', picture.savePicture);
 
 module.exports = router;

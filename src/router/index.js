@@ -170,7 +170,23 @@ export const asyncRouterMap = [{
         }
       }]
     },*/
-
+    {
+      path: '/admin/pic',
+      component: Layout,
+      redirect: 'index',
+      name: 'picture',
+      meta: { title: '图片管理', icon: 'category', role: ['admin', 'reader'] },
+      children: [{
+          path: 'index',
+          component: _import('admin/picture/index'),
+          name: 'picture-list',
+          meta: {
+              title: '图片管理',
+              icon: 'category',
+              role: ['admin', 'reader']
+          }
+      }]
+    },
     {
         path: '/icon',
         component: Layout,

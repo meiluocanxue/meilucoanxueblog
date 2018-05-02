@@ -14,7 +14,8 @@ var dbHelper = require('../../models/dbHelper');
 var uploadObj = {
     userpic: {storage: 'userpic', filename: 'u'},
     category: {storage: 'category', filename: 'c'},
-    article: {storage: 'article', filename: 'p'}
+    article: {storage: 'article', filename: 'p'},
+    editor: {storage: 'editor', filename: 'e'},
 };
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -82,7 +83,7 @@ router.get('/delete',function(req,res,next){
     if(!picId) res.json({status: 0,errorNum:100, message: '没有要删除的图片！'});
     dbHelper.Picture.findById(picId, function (err, doc) {
         let picUrl = doc.picurl;
-        console.log(path.join( __dirname , '../../public' +  picUrl));
+        //console.log(path.join( __dirname , '../../public' +  picUrl));
         let picPath = path.join( __dirname , '../../public' +  picUrl);
         //fs.unlink(path,callback);
         //return

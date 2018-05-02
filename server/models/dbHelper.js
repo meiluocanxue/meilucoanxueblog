@@ -144,7 +144,7 @@ var _getPicture = function () {
             ref:'Article'
         },
         order:{type:Number,default:1},
-        status:{type:Boolean, default:true}
+        status:{type:Boolean, default:false}
     },{timestamps:{createdAt:'created_at',updatedAt:'updated_at'}});
     //var Category = mongoose.models('Category', categorySchema, 'category');
     //return Promise.promisifyAll(Category);

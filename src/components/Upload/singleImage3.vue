@@ -36,8 +36,8 @@ export default {
 	props: {
 			value: String,
 			uploadType: {
-		type: String,
-		default: 'article'   //userpic category article
+				type: String,
+				default: 'article'   //userpic category article
 			},
 			hideOne: {
 		type: Boolean,
